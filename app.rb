@@ -7,36 +7,20 @@ require 'open-uri'
 require 'net/http'
 require 'json'
 require 'sinatra/json'
-enable :sessions
 
 post '/signup' do
     @user = User.create(
         user_id: params[:user_id], 
         fb_user_id: params[:fb_user_id], 
         birthday: params[:birthday], 
-        name: params[:name],
-        icon: params[:icon], 
-        friends: params[:friends]
+        name: params[:name]
     )
 end
 
-get '/users/:fb_user_id' do
-    @friends = Friend.all
-    @birthday = @friends.birthday.find(params[:fb_user_id]).order('date')
-    @name =  @friends.name.find(params[:fb_user_id])
-    data = {
-        responseData: {
-            results: [
-                "title": "Hello Swift:)",
-                "message": "入力して送信してね！"
-            ]
-        }
-    }
-    json data
-end
 
-get '/message' do
-    
+
+get '/users/:user_id/friends' do
+    @friends = Friend.where(user_id: params[:user_id]).to_json
 end
 
 post '/messages' do
@@ -48,28 +32,10 @@ post '/messages' do
     )
 end
 
-get '/messages?receiver_id' do
-    @receive_messages = Message.find(params[:receiver_id])
-    data = {
-        responseData: {
-            results: [
-                "title": "Hello Swift:)",
-                "message": "入力して送信してね！"
-            ]
-        }
-    }
-    json data
+get '/messages/:receiver_id' do
+    @receive_messages = Message.where(receiver_id: params[:receiver_id]).to_json
 end
 
-get '/messages?sender_id' do
-    @send_messages = Message.find(params[:sender_id])
-    data = {
-        responseData: {
-            results: [
-                "title": "Hello Swift:)",
-                "message": "入力して送信してね！"
-            ]
-        }
-    }
-    json data
+get '/messages/:sender_id' do
+    @send_messages = Message.where(sender_id: params[:sender_id]).to_json
 end
