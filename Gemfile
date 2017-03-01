@@ -14,10 +14,13 @@ gem 'sqlite3'
 
 gem 'dotenv'
 
-group :development do
-  gem 'sqlite3'
+group :development, :test do
+  gem "sqlite3"
+  gem "sinatra-reloader"
 end
 
-group :production do
-  gem 'pg'
+group :development do
+  gem 'capistrano', require: false
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
 end
