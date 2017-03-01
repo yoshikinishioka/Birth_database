@@ -7,11 +7,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'nokogiri'
 gem 'cloudinary'
-
 gem 'bcrypt'
-
-gem 'sqlite3'
-
 gem 'dotenv'
 
 group :development do
