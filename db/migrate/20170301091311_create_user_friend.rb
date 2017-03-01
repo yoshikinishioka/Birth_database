@@ -1,4 +1,4 @@
-class UsersFriends < ActiveRecord::Migration
+class CreateUserFriend < ActiveRecord::Migration
   def change
     create_table :users_friends do |t|
       t.references :user, index: true, null: false

@@ -1,4 +1,4 @@
-class Users < ActiveRecord::Migration
+class CreateUser < ActiveRecord::Migration
   def change
     create_table :users do |t|
       t.string :user_id
@@ -6,8 +6,7 @@ class Users < ActiveRecord::Migration
       t.date :birthday
       t.string :name
       t.string :icon
-      t.string :friends
-      
+
       t.timestamps null: false
     end
   end

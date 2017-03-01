@@ -19,7 +19,7 @@ class Friend < ActiveRecord::Base
     has_many :users, :through => :users_friends
 end
 
-class UsersFriends < ActiveRecord::Base
+class UserFriend < ActiveRecord::Base
     belongs_to :user
     belongs_to :friend
 end
