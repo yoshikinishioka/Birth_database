@@ -8,7 +8,9 @@ require 'net/http'
 require 'json'
 require 'sinatra/json'
 
-post '/login' do
+post '/login', provide: :json do
+    params = JSON.parse request.body.read
+    
     @user = User.create(
         fb_user_id: params[:fb_user_id], 
         birthday: params[:birthday], 
