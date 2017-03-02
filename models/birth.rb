@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
     has_many :messages
     has_many :users_friends
     has_many :friends, :through => :users_friends
+    
+    validates :fb_user_id,
+    uniqueness: true
+    
 end
 
 class Message < ActiveRecord::Base
