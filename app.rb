@@ -8,7 +8,7 @@ require 'net/http'
 require 'json'
 require 'sinatra/json'
 
-post '/login', provide: :json do
+post '/login' do
     params = JSON.parse request.body.read
     
     @user = User.create(
