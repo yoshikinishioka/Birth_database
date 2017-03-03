@@ -8,7 +8,7 @@ require 'net/http'
 require 'json'
 require 'sinatra/json'
 
-post '/login' do
+post '/signup' do
     params = JSON.parse request.body.read
         @user = User.create(
             fb_user_id: params["fb_user_id"], 
@@ -17,23 +17,31 @@ post '/login' do
         )
 end
 
-get '/users/:user_id/friends' do
-    @friends = Friend.where(user_id: params[:user_id]).to_json
+get '/login/:fb_user_id' do
+   redirect "/users/#{params[:fb_user_id]}" 
+end
+
+get '/users/:fb_user_id' do
+    @user = User.find(params[:fb_user_id]).to_json
+end
+
+get '/users/:fb_user_id/friends' do
+    @friends = Friend.where(fb_user_id: params[:fb_user_id]).to_json
 end
 
 post '/messages' do
+    params = JSON.parse request.body.read
     @message = Message.create(
-        content: params[:content],
-        receiver_id: params[:receiver_id],
-        sender_id: params[:sender_id],
-        message_id: params[:message_id]
+        content: params["content"],
+        receiver_id: params["receiver_id"],
+        sender_id: params["sender_id"]
     )
 end
 
 get '/messages/:receiver_id' do
-    @receive_messages = Message.where(receiver_id: params[:receiver_id]).to_json
+    @receive_messages = Message.where(fb_user_id: params["receiver_id"]).to_json
 end
 
 get '/messages/:sender_id' do
-    @send_messages = Message.where(sender_id: params[:sender_id]).to_json
+    @send_messages = Message.where(fb_user_id: params["sender_id"]).to_json
 end
