@@ -38,10 +38,10 @@ post '/messages' do
     )
 end
 
-get '/messages/:receiver_id' do
-    @receive_messages = Message.where(fb_user_id: params["receiver_id"]).to_json
+get '/messages/receive/:fb_user_id' do
+    @receive_messages = Message.where(receiver_id: params[:fb_user_id]).to_json
 end
 
-get '/messages/:sender_id' do
-    @send_messages = Message.where(fb_user_id: params["sender_id"]).to_json
+get '/messages/:send/:fb_user_id' do
+    @send_messages = Message.where(sender_id: params[:fb_user_id]).to_json
 end
