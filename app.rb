@@ -15,10 +15,30 @@ post '/signup' do
             birthday: params["birthday"], 
             name: params["name"]
         )
+        # redirect "/friend/#{params["fb_user_id"]}"
 end
 
 get '/login/:fb_user_id' do
    redirect "/users/#{params[:fb_user_id]}" 
+end
+
+# post '/friend/:fb_user_id' do
+#     params = JSON.parse request.body.read
+#     @friends = Friend.create(
+#         user_id: params[:fb_user_id],
+#         fb_user_id: params["fb_user_id"],
+#         birthday: params["birthday"],
+#         name: params["name"]
+#         )
+# end
+
+post '/friends/:fb_user_id' do
+    params = JSON.parse request.body.read
+    @friend = Friend.create(
+        user_id: params[:fb_user_id],
+        fb_user_id: params["fb_user_id"],
+        name: params["name"]
+    )
 end
 
 get '/users/:fb_user_id' do
@@ -26,7 +46,7 @@ get '/users/:fb_user_id' do
 end
 
 get '/users/:fb_user_id/friends' do
-    @friends = Friend.where(fb_user_id: params[:fb_user_id]).to_json
+    @friends = Friend.where(user_id: params[:fb_user_id]).to_json
 end
 
 post '/messages' do
@@ -40,6 +60,7 @@ end
 
 get '/messages/receive/:fb_user_id' do
     @receive_messages = Message.where(receiver_id: params[:fb_user_id]).to_json
+    
 end
 
 get '/messages/send/:fb_user_id' do
