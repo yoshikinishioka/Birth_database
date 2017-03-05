@@ -22,21 +22,12 @@ get '/login/:fb_user_id' do
    redirect "/users/#{params[:fb_user_id]}" 
 end
 
-# post '/friend/:fb_user_id' do
-#     params = JSON.parse request.body.read
-#     @friends = Friend.create(
-#         user_id: params[:fb_user_id],
-#         fb_user_id: params["fb_user_id"],
-#         birthday: params["birthday"],
-#         name: params["name"]
-#         )
-# end
-
 post '/friends/:fb_user_id' do
-    params = JSON.parse request.body.read
+    # params = JSON.parse request.body.read
     @friend = Friend.create(
         user_id: params[:fb_user_id],
         fb_user_id: params["fb_user_id"],
+        birthday: params["birthday"],
         name: params["name"]
     )
 end
