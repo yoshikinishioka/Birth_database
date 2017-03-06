@@ -43,8 +43,8 @@ end
 
 post '/messages' do
     params = JSON.parse request.body.read
-    receiver_name = name.Friend.find(params["receiver_id"])
-    sender_name = name.User.name.find(params["sender_id"])
+    receiver_name = Friend.where(fb_user_id: params["receiver_id"]).pluck(:name).first
+    sender_name = User.where(fb_user_id: params["sender_id"]).pluck(:name).first
     @message = Message.create(
         content: params["content"],
         receiver_id: params["receiver_id"],
