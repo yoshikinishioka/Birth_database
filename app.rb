@@ -43,12 +43,14 @@ end
 
 post '/messages' do
     params = JSON.parse request.body.read
+    receiver_name = name.Friend.find(params["receiver_id"])
+    sender_name = name.User.name.find(params["sender_id"])
     @message = Message.create(
         content: params["content"],
         receiver_id: params["receiver_id"],
-        sender_id: params["sender_id"]
-        #sender_name: User.name.find(fb_user_id: params["sender_id"]), #sender_nameには自分の名前を
-        #receiver_name: Friend.name.find(fb_user_id: params["receiver_id"]) #receiver_nameには送信先の友達の名前を
+        sender_id: params["sender_id"],
+        sender_name: sender_name, #sender_nameには自分の名前を
+        receiver_name: receiver_name #receiver_nameには送信先の友達の名前を
     )
 end
 
