@@ -28,7 +28,7 @@ post '/friends/:fb_user_id' do
     @friend = Friend.create(
         user_id: user_id, #自分のfb_user_idを友達にマーキング
         fb_user_id: params["fb_user_id"], #友達のfb_user_idのこと
-        birthday2: params["birthday"],
+        birthday: params["birthday"],
         name: params["name"]
     )
 end
