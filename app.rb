@@ -23,7 +23,7 @@ get '/login/:fb_user_id' do
 end
 
 post '/friends/:fb_user_id' do
-    # params = JSON.parse request.body.read
+    params = JSON.parse request.body.read
     @friend = Friend.create(
         user_id: params[:fb_user_id],
         fb_user_id: params["fb_user_id"],
