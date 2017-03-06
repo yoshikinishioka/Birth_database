@@ -46,9 +46,9 @@ post '/messages' do
     @message = Message.create(
         content: params["content"],
         receiver_id: params["receiver_id"],
-        sender_id: params["sender_id"],
-        sender_name: User.name.find(fb_user_id: params["sender_id"]), #sender_nameには自分の名前を
-        receiver_name: Friend.name.find(fb_user_id: params["receiver_id"]) #receiver_nameには送信先の友達の名前を
+        sender_id: params["sender_id"]
+        #sender_name: User.name.find(fb_user_id: params["sender_id"]), #sender_nameには自分の名前を
+        #receiver_name: Friend.name.find(fb_user_id: params["receiver_id"]) #receiver_nameには送信先の友達の名前を
     )
 end
 
